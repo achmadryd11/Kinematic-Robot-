@@ -68,6 +68,14 @@ void getKinematicData()
   Serial.println(rightLinearSpeed);
 }
 
+void testing(){
+  Serial.print("DATA,TIME,");
+  Serial.print(", ");
+  Serial.print(xPositionInCM);
+  Serial.print(", ");
+  Serial.println(yPositionInCM);
+}
+
 void processLeftForward()
 {
   kinematics.processLeftForward();
@@ -90,6 +98,9 @@ void processRightBackward()
 
 void setup() {
   Serial.begin(9600);
+  
+  //for load Data
+  //Serial.begin(128000);
   Serial.println("CLEARDATA");
   Serial.println("LABEL,CLOCK,xPositionInCM,yPositionInCM");
 
@@ -123,6 +134,9 @@ void loop() {
   rightLinearSpeed = kinematics.getRightSpeed();
   leftPosition = kinematics.getLeftPositionInCM();
   rightPosition = kinematics.getRightPositionInCM();
+
+  //send data to PLX-DAQ function
+  //testing();
 
   //Print Kinematic Data to PC
   getKinematicData();
